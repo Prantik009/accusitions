@@ -4,10 +4,10 @@ This guide explains how to run the Accusitions API using Docker for both develop
 
 ## Overview
 
-| Environment | Database | Docker Compose File |
-|-------------|----------|---------------------|
-| Development | Neon Local (ephemeral branches) | `docker-compose.dev.yml` |
-| Production | Neon Cloud | `docker-compose.prod.yml` |
+| Environment | Database                        | Docker Compose File       |
+| ----------- | ------------------------------- | ------------------------- |
+| Development | Neon Local (ephemeral branches) | `docker-compose.dev.yml`  |
+| Production  | Neon Cloud                      | `docker-compose.prod.yml` |
 
 ## Prerequisites
 
@@ -106,12 +106,14 @@ Production connects directly to **Neon Cloud** using your production database UR
    You can either use a `.env` file or inject variables directly (recommended for production).
 
    **Option A: Using .env file (for testing)**
+
    ```bash
    cp .env.production .env
    # Edit .env with your production values
    ```
 
    **Option B: Export environment variables (recommended)**
+
    ```bash
    export DATABASE_URL="postgres://user:password@ep-xxx.region.aws.neon.tech/dbname?sslmode=require"
    export JWT_SECRET="your_strong_production_secret"
@@ -163,27 +165,27 @@ curl http://localhost:3000/health
 
 ### Required for Development (Neon Local)
 
-| Variable | Description |
-|----------|-------------|
-| `NEON_API_KEY` | Your Neon API key |
-| `NEON_PROJECT_ID` | Your Neon project ID |
+| Variable           | Description                               |
+| ------------------ | ----------------------------------------- |
+| `NEON_API_KEY`     | Your Neon API key                         |
+| `NEON_PROJECT_ID`  | Your Neon project ID                      |
 | `PARENT_BRANCH_ID` | Branch ID to create ephemeral copies from |
 
 ### Required for Production
 
-| Variable | Description |
-|----------|-------------|
+| Variable       | Description                       |
+| -------------- | --------------------------------- |
 | `DATABASE_URL` | Full Neon Cloud connection string |
-| `JWT_SECRET` | Secret for signing JWT tokens |
+| `JWT_SECRET`   | Secret for signing JWT tokens     |
 
 ### Optional
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PORT` | `3000` | Server port |
-| `NODE_ENV` | `development` | Environment mode |
-| `LOG_LEVEL` | `info` | Logging level (debug, info, warn, error) |
-| `ARCJET_KEY` | - | Arcjet security key |
+| Variable     | Default       | Description                              |
+| ------------ | ------------- | ---------------------------------------- |
+| `PORT`       | `3000`        | Server port                              |
+| `NODE_ENV`   | `development` | Environment mode                         |
+| `LOG_LEVEL`  | `info`        | Logging level (debug, info, warn, error) |
+| `ARCJET_KEY` | -             | Arcjet security key                      |
 
 ---
 
@@ -192,17 +194,21 @@ curl http://localhost:3000/health
 The `DATABASE_URL` connection string format differs between environments:
 
 **Development (Neon Local):**
+
 ```
 postgres://neon:npg@neon-local:5432/neondb
 ```
+
 - `neon:npg` - Fixed credentials for Neon Local
 - `neon-local` - Docker service name (internal DNS)
 - No SSL required (internal network)
 
 **Production (Neon Cloud):**
+
 ```
 postgres://user:password@ep-xxx.region.aws.neon.tech/dbname?sslmode=require
 ```
+
 - Real credentials from Neon Console
 - Neon's serverless endpoint
 - SSL required
@@ -235,6 +241,7 @@ docker compose -f docker-compose.dev.yml logs neon-local
 ### Database migrations fail
 
 Run migrations manually after containers are fully started:
+
 ```bash
 # Development
 docker compose -f docker-compose.dev.yml exec app npm run db:migrate
@@ -246,6 +253,7 @@ docker compose -f docker-compose.prod.yml exec app node node_modules/drizzle-kit
 ### Container keeps restarting
 
 Check logs for errors:
+
 ```bash
 docker compose -f docker-compose.[dev|prod].yml logs app
 ```

@@ -3,7 +3,10 @@ import 'dotenv/config';
 import { neon, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 
-if (process.env.NODE_ENV === 'development' && process.env.NEON_LOCAL === 'true') {
+if (
+  process.env.NODE_ENV === 'development' &&
+  process.env.NEON_LOCAL === 'true'
+) {
   neonConfig.fetchEndpoint = `http://${process.env.NEON_LOCAL_HOST || 'localhost'}:5432/sql`;
   neonConfig.useSecureWebSocket = false;
   neonConfig.poolQueryViaFetch = true;
