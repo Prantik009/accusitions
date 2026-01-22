@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 
 //routes
 import authRoutes from './routes/auth.routes.js';
+import { securityMiddleware } from '#middleware/security.middleware.js';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(morgan('combined', {stream: {write: (msg) => logger.info(msg.trim()) }}));
 app.use(cookieParser());
+app.use(securityMiddleware)
 
 
 
