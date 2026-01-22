@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Application service - Production
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: accusitions-app-prod
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.production
+    volumes:
+      # Named volume for logs (optional, consider using external logging in production)
+      - app-logs:/app/logs
+    networks:
+      - accusitions-network
+    restart: always
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+networks:
+  accusitions-network:
+    driver: bridge
+
+volumes:
+  app-logs:

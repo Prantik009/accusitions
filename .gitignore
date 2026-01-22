@@ -1,2 +1,21 @@
+# Dependencies
 node_modules
+
+# Environment files (keep examples)
 .env
+.env.development
+.env.production
+.env.local
+!.env.example
+
+# Logs
+logs
+*.log
+
+# OS files
+.DS_Store
+
+# IDE
+.idea
+.vscode
+.neon_local/

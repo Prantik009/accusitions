@@ -149,3 +149,5 @@
 {"level":"info","message":"::1 - - [22/Jan/2026:07:49:43 +0000] \"GET /health HTTP/1.1\" 403 51 \"-\" \"PostmanRuntime/7.49.1\"","service":"accusitions-api"}
 {"ip":"::1","level":"warn","message":"Rate limit exceeded","path":"/health","service":"accusitions-api","userAgent":"PostmanRuntime/7.49.1"}
 {"level":"info","message":"::1 - - [22/Jan/2026:07:49:44 +0000] \"GET /health HTTP/1.1\" 403 51 \"-\" \"PostmanRuntime/7.49.1\"","service":"accusitions-api"}
+{"level":"info","message":"hellow from accusitions!","service":"accusitions-api"}
+{"level":"info","message":"::1 - - [22/Jan/2026:09:18:54 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36\"","service":"accusitions-api"}
